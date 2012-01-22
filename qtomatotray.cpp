@@ -72,7 +72,14 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
 
   if ( state == QTomatoTimer::POMODORO || state == QTomatoTimer::SHORTBREAK || state == QTomatoTimer::LONGBREAK ) {
     if ( pSecondsLeft >= 0 ) {
-      tooltip += tr( "QTomato - %1, %2 seconds left" ).arg( mTimer->getStateString() ).arg( pSecondsLeft ); // TODO: More friendly string with minutes.
+      int seconds = pSecondsLeft % 60;
+      int minutes = ( pSecondsLeft - seconds ) / 60;
+
+      if ( minutes > 0 ) {
+        tooltip += tr( "QTomato - %1, %2 minutes and %3 seconds left" ).arg( mTimer->getStateString() ).arg( minutes ).arg( seconds );
+      } else {
+        tooltip += tr( "QTomato - %1, %2 seconds left" ).arg( mTimer->getStateString() ).arg( seconds );
+      }
     }
   } else if ( state == QTomatoTimer::IDLE ) {
     tooltip = tr( "QTomato - Idle, click the icon to start a new pomodoro." );
