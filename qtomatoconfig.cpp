@@ -21,9 +21,15 @@
 
 QTomatoConfig::QTomatoConfig()
 {
+#ifdef QT_NO_DEBUG
   mPomodoroLength = 25 * 60;
   mShortBreakLength = 5 * 60;
   mLongBreakLength = 15 * 60;
+#else
+  mPomodoroLength = 25;
+  mShortBreakLength = 5;
+  mLongBreakLength = 15;
+#endif
 
   mLongBreakInterval = 4;
 }

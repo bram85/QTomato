@@ -37,6 +37,7 @@ public:
     ~QTomatoConfigDialog();
 
     QTomatoConfig getConfig() const;
+    void setConfig( QTomatoConfig pConfig );
     
 private:
     Ui::QTomatoConfigDialog *ui;

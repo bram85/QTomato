@@ -20,11 +20,16 @@
 #include "qtomatoconfigdialog.h"
 #include "ui_qtomatoconfigdialog.h"
 
+#ifndef QT_NO_DEBUG
+static const int sDebugFactor = 1;
+#else
+static const int sDebugFactor = 60;
+#endif
+
 QTomatoConfigDialog::QTomatoConfigDialog(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::QTomatoConfigDialog)
 {
-    // TODO: set values
     ui->setupUi(this);
 }
 
@@ -37,10 +42,18 @@ QTomatoConfig QTomatoConfigDialog::getConfig() const
 {
   QTomatoConfig config;
 
-  config.mPomodoroLength = ui->pomodoroLengthInput->value() * 60;
-  config.mShortBreakLength = ui->shortBreakLengthInput->value() * 60;
-  config.mLongBreakLength = ui->longBreakLengthInput->value() * 60;
-  config.mLongBreakInterval = ui->longBreakIntervalInput->value() * 60;
+  config.mPomodoroLength = ui->pomodoroLengthInput->value() * sDebugFactor;
+  config.mShortBreakLength = ui->shortBreakLengthInput->value() * sDebugFactor;
+  config.mLongBreakLength = ui->longBreakLengthInput->value() * sDebugFactor;
+  config.mLongBreakInterval = ui->longBreakIntervalInput->value();
 
   return config;
+}
+
+void QTomatoConfigDialog::setConfig(QTomatoConfig pConfig)
+{
+  ui->pomodoroLengthInput->setValue( pConfig.mPomodoroLength / sDebugFactor );
+  ui->shortBreakLengthInput->setValue( pConfig.mShortBreakLength / sDebugFactor );
+  ui->longBreakLengthInput->setValue( pConfig.mLongBreakLength / sDebugFactor );
+  ui->longBreakIntervalInput->setValue( pConfig.mLongBreakInterval );
 }
