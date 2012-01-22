@@ -195,3 +195,8 @@ QTomatoConfig QTomatoTimer::getConfig() const
 {
   return mConfig;
 }
+
+int QTomatoTimer::getCompleted() const
+{
+  return mCompleted;
+}

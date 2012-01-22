@@ -99,17 +99,23 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
       int minutes = ( pSecondsLeft - seconds ) / 60;
 
       if ( minutes > 0 ) {
-        tooltip += tr( "QTomato - %1, %2 minutes and %3 seconds left" ).arg( mTimer->getStateString() ).arg( minutes ).arg( seconds );
+        tooltip += tr( "QTomato - %1, %2 minutes and %3 seconds left." ).arg( mTimer->getStateString() ).arg( minutes ).arg( seconds );
       } else {
-        tooltip += tr( "QTomato - %1, %2 seconds left" ).arg( mTimer->getStateString() ).arg( seconds );
+        tooltip += tr( "QTomato - %1, %2 seconds left." ).arg( mTimer->getStateString() ).arg( seconds );
       }
     }
   } else if ( state == QTomatoTimer::IDLE ) {
     tooltip = tr( "QTomato - Idle, click the icon to start a new pomodoro." );
   } else if ( state == QTomatoTimer::AWAITBREAK ) {
-    tooltip = tr( "Pomodoro finished, click to start the break." );
+    tooltip = tr( "QTomato - Pomodoro finished, click to start the break." );
   } else {
     Q_ASSERT( "Unknown state." );
+  }
+
+  int completed = mTimer->getCompleted();
+  if ( completed > 0 ) {
+    // FIXME: not RTL friendly
+    tooltip += " " + tr( "%n pomodoro(s) completed.", "", completed );
   }
 
   setToolTip( tooltip );
@@ -162,6 +168,7 @@ void QTomatoTray::slotShowConfiguration()
 {
   QTomatoConfigDialog *qcd = new QTomatoConfigDialog();
 
+  qcd->setConfig( mTimer->getConfig() );
   if ( qcd->exec() == QDialog::Accepted ) {
     mTimer->setConfig( qcd->getConfig() );
   }

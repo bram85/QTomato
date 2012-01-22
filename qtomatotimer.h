@@ -54,6 +54,8 @@ public:
     QTomatoConfig getConfig() const;
     void setConfig( QTomatoConfig pConfig );
 
+    int getCompleted() const;
+
 signals:
     /**
       * Emit a tick, passing along the number of seconds left.
