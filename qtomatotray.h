@@ -22,6 +22,7 @@ protected slots:
     void slotTick( int pSecondsLeft );
     void slotQuit();
     void slotRequestConfirmation();
+    void slotShowConfiguration();
 
 protected:
     void buildMenu();

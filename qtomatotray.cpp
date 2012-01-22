@@ -2,6 +2,7 @@
 #include <QMenu>
 #include <QMessageBox>
 
+#include "qtomatoconfigdialog.h"
 #include "qtomatotimer.h"
 
 #include "qtomatotray.h"
@@ -58,6 +59,9 @@ void QTomatoTray::buildMenu()
   QAction *a;
 	a = mMenu->addAction( tr( "Reset" ) );
 	connect( a, SIGNAL( triggered()), mTimer, SLOT( slotReset()) );
+  mMenu->addSeparator();
+  a = mMenu->addAction( tr( "Settings..." ) );
+  connect( a, SIGNAL( triggered()), SLOT( slotShowConfiguration() ) );
   mMenu->addSeparator();
   a = mMenu->addAction( tr( "Quit" ) );
   connect( a, SIGNAL( triggered()), SLOT( slotQuit() ) );
@@ -131,4 +135,15 @@ void QTomatoTray::slotRequestConfirmation()
     mTimer->confirm();
   }
 
+}
+
+void QTomatoTray::slotShowConfiguration()
+{
+  QTomatoConfigDialog *qcd = new QTomatoConfigDialog();
+
+  if ( qcd->exec() == QDialog::Accepted ) {
+    mTimer->setConfig( qcd->getConfig() );
+  }
+
+  delete qcd;
 }

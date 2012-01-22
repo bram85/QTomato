@@ -2,20 +2,6 @@
 
 #include "qtomatotimer.h"
 
-// TODO: Make configurable.
-#ifdef QT_NO_DEBUG
-static const int POMODORO_LENGTH = 25 * 60;
-static const int SHORTBREAK_LENGTH = 5 * 60;
-static const int LONGBREAK_LENGTH = 15 * 60;
-#else // turn minutes into seconds
-static const int POMODORO_LENGTH = 25;
-static const int SHORTBREAK_LENGTH = 5;
-static const int LONGBREAK_LENGTH = 15;
-#endif
-
-// the 4th break is a long break
-static const int LONGBREAK_INTERVAL = 4;
-
 QTomatoTimer::QTomatoTimer(QObject *parent) :
     QObject(parent)
   , mState( QTomatoTimer::IDLE )
@@ -29,7 +15,7 @@ void QTomatoTimer::startPomodoro()
 {
   qDebug() << "Starting new pomodoro.";
 
-  startTimer( POMODORO_LENGTH );
+  startTimer( mConfig.mPomodoroLength );
   mState = QTomatoTimer::POMODORO;
 }
 
@@ -37,7 +23,7 @@ void QTomatoTimer::startShortBreak()
 {
   qDebug() << "Starting short break.";
 
-  startTimer( SHORTBREAK_LENGTH );
+  startTimer( mConfig.mShortBreakLength );
   mState = QTomatoTimer::SHORTBREAK;
 }
 
@@ -45,7 +31,7 @@ void QTomatoTimer::startLongBreak()
 {
   qDebug() << "Starting long break.";
 
-  startTimer( LONGBREAK_LENGTH );
+  startTimer( mConfig.mLongBreakLength );
   mState = QTomatoTimer::LONGBREAK;
 }
 
@@ -123,7 +109,7 @@ void QTomatoTimer::step()
       break;
     }
     case AWAITBREAK: {
-      if ( mCompleted < LONGBREAK_INTERVAL ) {
+      if ( mCompleted < mConfig.mLongBreakInterval ) {
         startShortBreak();
       } else {
         startLongBreak();
@@ -177,5 +163,16 @@ QString QTomatoTimer::stateToString( QTomatoState pState )
 
 bool QTomatoTimer::nextBreakIsLong() const
 {
-  return mCompleted == LONGBREAK_INTERVAL;
+  return mCompleted == mConfig.mLongBreakInterval;
+}
+
+void QTomatoTimer::setConfig( QTomatoConfig pConfig )
+{
+  mConfig = pConfig;
+  slotReset();
+}
+
+QTomatoConfig QTomatoTimer::getConfig() const
+{
+  return mConfig;
 }

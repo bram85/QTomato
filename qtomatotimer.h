@@ -4,6 +4,8 @@
 #include <QObject>
 #include <QTimer>
 
+#include "qtomatoconfig.h"
+
 class QTomatoTimer : public QObject
 {
     Q_OBJECT
@@ -30,6 +32,9 @@ public:
 
     bool nextBreakIsLong() const;
 
+    QTomatoConfig getConfig() const;
+    void setConfig( QTomatoConfig pConfig );
+
 signals:
     /**
       * Emit a tick, passing along the number of seconds left.
@@ -55,6 +60,7 @@ protected:
     void goIdle();
 
 private:
+    QTomatoConfig mConfig;
     QTomatoState mState;
     int mSecondsLeft;
     int mCompleted;
