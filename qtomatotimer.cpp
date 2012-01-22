@@ -65,7 +65,7 @@ void QTomatoTimer::goIdle()
   emit tick( -1 );
 }
 
-void QTomatoTimer::slotReset()
+void QTomatoTimer::reset()
 {
     goIdle();
     mCompleted = 0;
@@ -188,7 +188,7 @@ bool QTomatoTimer::nextBreakIsLong() const
 void QTomatoTimer::setConfig( QTomatoConfig pConfig )
 {
   mConfig = pConfig;
-  slotReset();
+  reset();
 }
 
 QTomatoConfig QTomatoTimer::getConfig() const

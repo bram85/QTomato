@@ -77,7 +77,7 @@ void QTomatoTray::buildMenu()
 
   QAction *a;
 	a = mMenu->addAction( tr( "Reset" ) );
-	connect( a, SIGNAL( triggered()), mTimer, SLOT( slotReset()) );
+	connect( a, SIGNAL( triggered()), SLOT( slotReset()) );
   mMenu->addSeparator();
   a = mMenu->addAction( tr( "Settings..." ) );
   connect( a, SIGNAL( triggered()), SLOT( slotShowConfiguration() ) );
@@ -174,4 +174,11 @@ void QTomatoTray::slotShowConfiguration()
   }
 
   delete qcd;
+}
+
+void QTomatoTray::slotReset()
+{
+  if ( QMessageBox::question( 0, tr( "QTomato" ), tr( "Do you want to reset QTomato? All completed pomodoros will be lost." ), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+    mTimer->reset();
+  }
 }

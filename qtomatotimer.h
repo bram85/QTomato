@@ -45,6 +45,9 @@ public:
     /** Proceed when the user confirms an action. */
     void confirm();
 
+    /** Reset the timer. */
+    void reset();
+
     QTomatoState getState() const;
     QString getStateString() const;
     static QString stateToString( QTomatoState pState );
@@ -55,6 +58,7 @@ public:
     void setConfig( QTomatoConfig pConfig );
 
     int getCompleted() const;
+
 
 signals:
     /**
@@ -69,9 +73,6 @@ signals:
 public slots:
     /** Called every second when mTimer times out. */
     void slotTick();
-
-    /** Reset the timer. */
-    void slotReset();
 
 protected:
     void startTimer( int pSeconds );
