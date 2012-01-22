@@ -1,0 +1,30 @@
+digraph {
+  "Idle";
+  "Pomodoro";
+  "WaitPreBreak";
+
+  subgraph {
+    rank = same;
+    "ShortBreak";
+    "LongBreak";
+  }
+
+  Idle -> Pomodoro [ label = "click" ];
+  Idle -> Idle [ label = "reset, completed := 0" ];
+
+  Pomodoro -> WaitPreBreak [ label = "25 min, completed++" ];
+  Pomodoro -> Idle [ label = "reset, completed := 0" ];
+  Pomodoro -> Idle [ label = "click*" ];
+
+  WaitPreBreak -> ShortBreak [ label = "click, completed < 4" ];
+  WaitPreBreak -> LongBreak [ label = "click, completed = 4" ];
+  WaitPreBreak -> Idle [ label = "reset, completed := 0" ];
+
+  ShortBreak -> Idle [ label = "5 min" ];
+  ShortBreak -> Idle [ label = "reset, completed := 0" ];
+  ShortBreak -> Pomodoro[ label = "click*"  ];
+
+  LongBreak -> Idle [ label = "15 min, completed := 0" ];
+  LongBreak -> Idle [ label = "reset, completed := 0" ];
+  LongBreak -> Pomodoro [ label = "click*, completed := 0" ];
+}
