@@ -12,11 +12,18 @@ TEMPLATE = app
 
 SOURCES += main.cpp \
     qtomatotray.cpp \
-    qtomatotimer.cpp
+    qtomatotimer.cpp \
+    qtomatoconfigdialog.cpp \
+    qtomatoconfig.cpp
 
 HEADERS  += \
     qtomatotray.h \
-    qtomatotimer.h
+    qtomatotimer.h \
+    qtomatoconfigdialog.h \
+    qtomatoconfig.h
 
 RESOURCES += \
     QTomato.qrc
+
+FORMS += \
+    qtomatoconfigdialog.ui
