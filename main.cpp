@@ -20,10 +20,16 @@
 #include <QtGui/QApplication>
 #include "qtomatotray.h"
 
+static const QString sAppname = "QTomato";
+static const QString sVersion = "0.1.99";
+
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     a.setQuitOnLastWindowClosed( false );
+
+    a.setApplicationName( sAppname );
+    a.setApplicationVersion( sVersion );
 
     QTomatoTray qtt;
 
