@@ -108,7 +108,9 @@ void QTomatoTray::slotLongBreakCompleted()
 
 void QTomatoTray::slotQuit()
 {
-  QCoreApplication::exit( 0 );
+  if ( QMessageBox::question( 0, tr( "QTomato" ), tr( "Do you want to quit QTomato?" ), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
+    QCoreApplication::exit( 0 );
+  }
 }
 
 void QTomatoTray::slotRequestConfirmation()
