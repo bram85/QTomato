@@ -38,6 +38,7 @@ QTomatoTray::QTomatoTray(QObject *parent) :
     connect( mTimer, SIGNAL(requestConfirmation()), SLOT( slotRequestConfirmation() ) );
 
     connect( this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(slotActivated(QSystemTrayIcon::ActivationReason)));
+    connect( this, SIGNAL(messageClicked()), SLOT(slotStep()));
 
     buildMenu();
     updateTooltip();
@@ -47,8 +48,13 @@ QTomatoTray::QTomatoTray(QObject *parent) :
 void QTomatoTray::slotActivated( QSystemTrayIcon::ActivationReason pActivationReason )
 {
   if ( pActivationReason == QSystemTrayIcon::Trigger ) {
-    mTimer->step();
+    slotStep();
   }
+}
+
+void QTomatoTray::slotStep()
+{
+  mTimer->step();
 }
 
 void QTomatoTray::slotTick( int pSecondsLeft )
@@ -64,8 +70,8 @@ void QTomatoTray::updateIcon( int pSecondsLeft )
 
 void QTomatoTray::slotPomodoroCompleted()
 {
-  QString message = mTimer->nextBreakIsLong() ? tr( "Time's up, click the icon to start a long break." )
-                                              : tr( "Time's up, click the icon to start a short break." );
+  QString message = mTimer->nextBreakIsLong() ? tr( "Time's up, click to start a long break." )
+                                              : tr( "Time's up, click to start a short break." );
   showMessage( tr( "QTomato" ), message );
 }
 
@@ -107,7 +113,7 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
   } else if ( state == QTomatoTimer::IDLE ) {
     tooltip = tr( "QTomato - Idle, click the icon to start a new pomodoro." );
   } else if ( state == QTomatoTimer::AWAITBREAK ) {
-    tooltip = tr( "QTomato - Pomodoro finished, click to start the break." );
+    tooltip = tr( "QTomato - Pomodoro finished, click the icon to start the break." );
   } else {
     Q_ASSERT( "Unknown state." );
   }
@@ -123,12 +129,12 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
 
 void QTomatoTray::slotShortBreakCompleted()
 {
-  showMessage( tr( "QTomato" ), "Short break is over, click the icon to start." );
+  showMessage( tr( "QTomato" ), "Short break is over, click here to start." );
 }
 
 void QTomatoTray::slotLongBreakCompleted()
 {
-  showMessage( tr( "QTomato" ), "Long break is over, click the icon to start." );
+  showMessage( tr( "QTomato" ), "Long break is over, click here to start." );
 }
 
 void QTomatoTray::slotQuit()

@@ -43,6 +43,8 @@ protected slots:
     void slotRequestConfirmation();
     void slotShowConfiguration();
     void slotReset();
+    /** Called when the user clicks the icon or the popup. */
+    void slotStep();
 
 protected:
     void buildMenu();
