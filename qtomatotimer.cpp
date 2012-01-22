@@ -1,15 +1,13 @@
-#define DEBUG 1
-
 #include <QDebug>
 
 #include "qtomatotimer.h"
 
 // TODO: Make configurable.
-#ifndef DEBUG
+#ifdef QT_NO_DEBUG
 static const int POMODORO_LENGTH = 25 * 60;
 static const int SHORTBREAK_LENGTH = 5 * 60;
 static const int LONGBREAK_LENGTH = 15 * 60;
-#else
+#else // turn minutes into seconds
 static const int POMODORO_LENGTH = 25;
 static const int SHORTBREAK_LENGTH = 5;
 static const int LONGBREAK_LENGTH = 15;
