@@ -30,6 +30,9 @@ public:
   int mShortBreakLength;
   int mLongBreakLength;
   int mLongBreakInterval;
+
+  int mPenaltyFactor;
+  int mRewardFactor;
 };
 
 #endif // QTOMATOCONFIG_H

@@ -17,6 +17,7 @@
  * along with QTomato.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <qmath.h>
 #include <QDebug>
 
 #include "qtomatotimer.h"
@@ -32,25 +33,54 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
 
 void QTomatoTimer::startPomodoro()
 {
-  qDebug() << "Starting new pomodoro.";
+  qDebug() << mSecondsLeft;
+  int penalty = qCeil( -1 * mSecondsLeft * ( qreal( mConfig.mPenaltyFactor ) / 10 ) );
 
-  startTimer( mConfig.mPomodoroLength );
+  qDebug() << "Starting new pomodoro with length"
+           << mConfig.mPomodoroLength + penalty
+           << "("
+           << mConfig.mPomodoroLength
+           << "+"
+           << penalty
+           << ")";
+
+  startTimer( mConfig.mPomodoroLength + penalty );
   mState = QTomatoTimer::POMODORO;
 }
 
 void QTomatoTimer::startShortBreak()
 {
-  qDebug() << "Starting short break.";
+  qDebug() << mSecondsLeft;
+  // reward overtime
+  int reward = qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 10 ) );
 
-  startTimer( mConfig.mShortBreakLength );
+  qDebug() << "Starting short break with length"
+           << mConfig.mShortBreakLength + reward
+           << "("
+           << mConfig.mShortBreakLength
+           << "+"
+           << reward
+           << ")";
+
+  startTimer( mConfig.mShortBreakLength + reward );
   mState = QTomatoTimer::SHORTBREAK;
 }
 
 void QTomatoTimer::startLongBreak()
 {
-  qDebug() << "Starting long break.";
+  qDebug() << mSecondsLeft;
+  // reward overtime
+  int reward = qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 10 ) );
 
-  startTimer( mConfig.mLongBreakLength );
+  qDebug() << "Starting long break with length"
+           << mConfig.mLongBreakLength + reward
+           << "("
+           << mConfig.mLongBreakLength
+           << "+"
+           << reward
+           << ")";
+
+  startTimer( mConfig.mLongBreakLength + reward );
   mState = QTomatoTimer::LONGBREAK;
 }
 
@@ -91,12 +121,12 @@ void QTomatoTimer::slotTick()
         break;
       }
       case QTomatoTimer::SHORTBREAK: {
-        goIdle();
+        mState = AWAITPOMODORO;
         emit shortBreakCompleted();
         break;
       }
       case QTomatoTimer::LONGBREAK: {
-        goIdle();
+        mState = AWAITPOMODORO;
         mCompleted = 0;
         emit longBreakCompleted();
         break;
@@ -117,7 +147,8 @@ QTomatoTimer::QTomatoState QTomatoTimer::getState() const
 void QTomatoTimer::step()
 {
   switch ( mState ) {
-    case IDLE: {
+    case IDLE:
+    case AWAITPOMODORO: {
       startPomodoro();
       break;
     }

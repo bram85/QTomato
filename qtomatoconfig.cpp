@@ -32,6 +32,9 @@ QTomatoConfig::QTomatoConfig()
 #endif
 
   mLongBreakInterval = 4;
+
+  mPenaltyFactor = 0;
+  mRewardFactor = 0;
 }
 
 void QTomatoConfig::operator=( const QTomatoConfig &pConfig )
@@ -41,4 +44,7 @@ void QTomatoConfig::operator=( const QTomatoConfig &pConfig )
   mLongBreakLength = pConfig.mLongBreakLength;
 
   mLongBreakInterval = pConfig.mLongBreakInterval;
+
+  mPenaltyFactor = pConfig.mPenaltyFactor;
+  mRewardFactor = pConfig.mRewardFactor;
 }
