@@ -26,6 +26,7 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
   , mState( QTomatoTimer::IDLE )
   , mSecondsLeft( 0 )
   , mCompleted( 0 )
+  , mTotalCompleted( 0 )
 {
   connect( &mTimer, SIGNAL(timeout()), SLOT(slotTick()));
 }
@@ -86,6 +87,7 @@ void QTomatoTimer::slotTick()
     switch ( mState ) {
       case QTomatoTimer::POMODORO: {
         ++mCompleted;
+        ++mTotalCompleted;
         mState = AWAITBREAK;
         emit pomodoroCompleted();
         break;
@@ -198,5 +200,6 @@ QTomatoConfig QTomatoTimer::getConfig() const
 
 int QTomatoTimer::getCompleted() const
 {
-  return mCompleted;
+  // mCompleted gets reset after long break, not useful to expose.
+  return mTotalCompleted;
 }
