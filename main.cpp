@@ -19,7 +19,11 @@
 
 #include <QtGui/QApplication>
 #include "qtomatotray.h"
-#include "version.h"
+
+static const QString sAppname = "QTomato";
+static const QString sVersion = "0.2.99";
+static const QString sOrganization = "bramschoenmakers.nl";
+static const QString sDomain = "bramschoenmakers.nl";
 
 int main(int argc, char *argv[])
 {
@@ -28,6 +32,8 @@ int main(int argc, char *argv[])
 
     a.setApplicationName( sAppname );
     a.setApplicationVersion( sVersion );
+    a.setOrganizationName( sOrganization );
+    a.setOrganizationDomain( sDomain );
 
     QTomatoTray qtt;
 

@@ -23,7 +23,6 @@
 
 #include "qtomatoconfigdialog.h"
 #include "qtomatotimer.h"
-#include "version.h"
 
 #include "qtomatotray.h"
 
@@ -205,7 +204,7 @@ void QTomatoTray::slotReleaseLock()
 
 void QTomatoTray::slotAbout()
 {
-  QString text = tr( "QTomato %1" ).arg( sVersion );
+  QString text = tr( "QTomato %1" ).arg( QCoreApplication::applicationVersion() );
 
   text += "\n\n";
 
