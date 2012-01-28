@@ -43,8 +43,8 @@ protected slots:
     void slotRequestConfirmation();
     void slotShowConfiguration();
     void slotReset();
-    /** Called when the user clicks the icon or the popup. */
     void slotStep();
+    void slotReleaseLock();
 
 protected:
     void buildMenu();
@@ -54,6 +54,7 @@ protected:
 private:
     QMenu *mMenu;
     QTomatoTimer *mTimer;
+    int mStepLock;
 };
 
 #endif // QTOMATOTRAY_H
