@@ -26,6 +26,9 @@ public:
   QTomatoConfig();
   void operator=( const QTomatoConfig &pConfig );
 
+  static void save( const QTomatoConfig &pConfig );
+  static QTomatoConfig load();
+
   int mPomodoroLength;
   int mShortBreakLength;
   int mLongBreakLength;

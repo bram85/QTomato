@@ -184,7 +184,9 @@ void QTomatoTray::slotShowConfiguration()
 
   qcd->setConfig( mTimer->getConfig() );
   if ( qcd->exec() == QDialog::Accepted ) {
-    mTimer->setConfig( qcd->getConfig() );
+    QTomatoConfig config = qcd->getConfig();
+    mTimer->setConfig( config );
+    QTomatoConfig::save( config );
   }
 
   delete qcd;

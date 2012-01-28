@@ -17,6 +17,8 @@
  * along with QTomato.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include <QSettings>
+
 #include "qtomatoconfig.h"
 
 QTomatoConfig::QTomatoConfig()
@@ -41,4 +43,27 @@ void QTomatoConfig::operator=( const QTomatoConfig &pConfig )
   mLongBreakLength = pConfig.mLongBreakLength;
 
   mLongBreakInterval = pConfig.mLongBreakInterval;
+}
+
+void QTomatoConfig::save( const QTomatoConfig &pConfig )
+{
+  QSettings s;
+
+  s.setValue( "pomodorolength", pConfig.mPomodoroLength );
+  s.setValue( "shortbreaklength", pConfig.mShortBreakLength );
+  s.setValue( "longbreaklength", pConfig.mLongBreakLength );
+  s.setValue( "longbreakinterval", pConfig.mLongBreakInterval );
+}
+
+QTomatoConfig QTomatoConfig::load()
+{
+  QSettings s;
+  QTomatoConfig config;
+
+  config.mPomodoroLength = s.value( "pomodorolength", config.mPomodoroLength ).toInt();
+  config.mShortBreakLength = s.value( "shortbreaklength", config.mShortBreakLength ).toInt();
+  config.mLongBreakLength = s.value( "longbreaklength", config.mLongBreakLength ).toInt();
+  config.mLongBreakInterval = s.value( "longbreakinterval", config.mLongBreakInterval ).toInt();
+
+  return config;
 }

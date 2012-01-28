@@ -28,6 +28,7 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
   , mCompleted( 0 )
   , mTotalCompleted( 0 )
 {
+  mConfig = QTomatoConfig::load();
   connect( &mTimer, SIGNAL(timeout()), SLOT(slotTick()));
 }
 
