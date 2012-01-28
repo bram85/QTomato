@@ -45,6 +45,7 @@ protected slots:
     void slotReset();
     void slotStep();
     void slotReleaseLock();
+    void slotAbout();
 
 protected:
     void buildMenu();

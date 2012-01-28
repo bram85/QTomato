@@ -19,9 +19,7 @@
 
 #include <QtGui/QApplication>
 #include "qtomatotray.h"
-
-static const QString sAppname = "QTomato";
-static const QString sVersion = "0.1.99";
+#include "version.h"
 
 int main(int argc, char *argv[])
 {

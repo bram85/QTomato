@@ -20,7 +20,8 @@ HEADERS  += \
     qtomatotray.h \
     qtomatotimer.h \
     qtomatoconfigdialog.h \
-    qtomatoconfig.h
+    qtomatoconfig.h \
+    version.h
 
 RESOURCES += \
     QTomato.qrc

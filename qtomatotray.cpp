@@ -23,6 +23,7 @@
 
 #include "qtomatoconfigdialog.h"
 #include "qtomatotimer.h"
+#include "version.h"
 
 #include "qtomatotray.h"
 
@@ -94,6 +95,8 @@ void QTomatoTray::buildMenu()
   a = mMenu->addAction( tr( "Settings..." ) );
   connect( a, SIGNAL( triggered()), SLOT( slotShowConfiguration() ) );
   mMenu->addSeparator();
+  a = mMenu->addAction( tr( "About QTomato..." ) );
+  connect( a, SIGNAL( triggered()), SLOT( slotAbout() ) );
   a = mMenu->addAction( tr( "Quit" ) );
   connect( a, SIGNAL( triggered()), SLOT( slotQuit() ) );
 
@@ -198,4 +201,15 @@ void QTomatoTray::slotReset()
 void QTomatoTray::slotReleaseLock()
 {
   mStepLock = 1;
+}
+
+void QTomatoTray::slotAbout()
+{
+  QString text = tr( "QTomato %1" ).arg( sVersion );
+
+  text += "\n\n";
+
+  text += "Bram Schoenmakers <me@bramschoenmakers.nl>";
+
+  QMessageBox::about( 0, tr( "About QTomato" ), text );
 }
