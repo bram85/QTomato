@@ -10,20 +10,20 @@ TARGET = QTomato
 TEMPLATE = app
 
 
-SOURCES += main.cpp \
-    qtomatotray.cpp \
-    qtomatotimer.cpp \
-    qtomatoconfigdialog.cpp \
-    qtomatoconfig.cpp
+SOURCES += src/main.cpp \
+    src/qtomatotray.cpp \
+    src/qtomatotimer.cpp \
+    src/qtomatoconfigdialog.cpp \
+    src/qtomatoconfig.cpp
 
 HEADERS  += \
-    qtomatotray.h \
-    qtomatotimer.h \
-    qtomatoconfigdialog.h \
-    qtomatoconfig.h
+    src/qtomatotray.h \
+    src/qtomatotimer.h \
+    src/qtomatoconfigdialog.h \
+    src/qtomatoconfig.h
 
 RESOURCES += \
-    QTomato.qrc
+    src/QTomato.qrc
 
 FORMS += \
-    qtomatoconfigdialog.ui
+    src/qtomatoconfigdialog.ui
