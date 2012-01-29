@@ -58,6 +58,6 @@ void QTomatoConfigDialog::setConfig(QTomatoConfig pConfig)
   ui->shortBreakLengthInput->setValue( pConfig.mShortBreakLength / sDebugFactor );
   ui->longBreakLengthInput->setValue( pConfig.mLongBreakLength / sDebugFactor );
   ui->longBreakIntervalInput->setValue( pConfig.mLongBreakInterval );
-  ui->penaltyFactorInput->setValue( pConfig.mPenaltyFactor / 100 );
-  ui->rewardFactorInput->setValue( pConfig.mRewardFactor / 100 );
+  ui->penaltyFactorInput->setValue( qreal( pConfig.mPenaltyFactor ) / 100 );
+  ui->rewardFactorInput->setValue( qreal( pConfig.mRewardFactor ) / 100 );
 }
