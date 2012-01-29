@@ -23,7 +23,7 @@ HEADERS  += \
     src/qtomatoconfig.h
 
 RESOURCES += \
-    src/QTomato.qrc
+    QTomato.qrc
 
 FORMS += \
     src/qtomatoconfigdialog.ui
