@@ -27,3 +27,6 @@ RESOURCES += \
 
 FORMS += \
     src/qtomatoconfigdialog.ui
+
+TRANSLATIONS += \
+    l10n/qtomato_nl.ts
