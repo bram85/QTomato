@@ -1,5 +1,5 @@
-QTomato 0.2
-===========
+QTomato
+=======
 
 This is QTomato, a Qt implementation of the Pomodoro technique.
 
