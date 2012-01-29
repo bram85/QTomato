@@ -46,8 +46,8 @@ QTomatoConfig QTomatoConfigDialog::getConfig() const
   config.mShortBreakLength = ui->shortBreakLengthInput->value() * sDebugFactor;
   config.mLongBreakLength = ui->longBreakLengthInput->value() * sDebugFactor;
   config.mLongBreakInterval = ui->longBreakIntervalInput->value();
-  config.mPenaltyFactor = qRound( ui->penaltyFactorInput->value() * 10 ) ;
-  config.mRewardFactor = qRound( ui->rewardFactorInput->value() * 10 );
+  config.mPenaltyFactor = qRound( ui->penaltyFactorInput->value() * 100 ) ;
+  config.mRewardFactor = qRound( ui->rewardFactorInput->value() * 100 );
 
   return config;
 }
@@ -58,6 +58,6 @@ void QTomatoConfigDialog::setConfig(QTomatoConfig pConfig)
   ui->shortBreakLengthInput->setValue( pConfig.mShortBreakLength / sDebugFactor );
   ui->longBreakLengthInput->setValue( pConfig.mLongBreakLength / sDebugFactor );
   ui->longBreakIntervalInput->setValue( pConfig.mLongBreakInterval );
-  ui->penaltyFactorInput->setValue( pConfig.mPenaltyFactor / 10 );
-  ui->rewardFactorInput->setValue( pConfig.mRewardFactor / 10 );
+  ui->penaltyFactorInput->setValue( pConfig.mPenaltyFactor / 100 );
+  ui->rewardFactorInput->setValue( pConfig.mRewardFactor / 100 );
 }
