@@ -88,15 +88,15 @@ void QTomatoTray::buildMenu()
 	}
 
   QAction *a;
-	a = mMenu->addAction( tr( "Reset" ) );
+    a = mMenu->addAction( tr( "&Reset" ) );
 	connect( a, SIGNAL( triggered()), SLOT( slotReset()) );
   mMenu->addSeparator();
-  a = mMenu->addAction( tr( "Settings..." ) );
+  a = mMenu->addAction( tr( "&Settings..." ) );
   connect( a, SIGNAL( triggered()), SLOT( slotShowConfiguration() ) );
   mMenu->addSeparator();
-  a = mMenu->addAction( tr( "About QTomato..." ) );
+  a = mMenu->addAction( tr( "&About QTomato..." ) );
   connect( a, SIGNAL( triggered()), SLOT( slotAbout() ) );
-  a = mMenu->addAction( tr( "Quit" ) );
+  a = mMenu->addAction( tr( "&Quit" ) );
   connect( a, SIGNAL( triggered()), SLOT( slotQuit() ) );
 
 	setContextMenu( mMenu );

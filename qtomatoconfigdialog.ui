@@ -30,7 +30,7 @@
    <item row="0" column="0">
     <widget class="QLabel" name="pomodoroLengthLabel">
      <property name="text">
-      <string>Pomodoro length</string>
+      <string>&amp;Pomodoro length</string>
      </property>
      <property name="buddy">
       <cstring>pomodoroLengthInput</cstring>
@@ -69,7 +69,7 @@
    <item row="1" column="0">
     <widget class="QLabel" name="shortBreakLengthLabel">
      <property name="text">
-      <string>Short break length</string>
+      <string>&amp;Short break length</string>
      </property>
      <property name="buddy">
       <cstring>shortBreakLengthInput</cstring>
@@ -108,7 +108,7 @@
    <item row="2" column="0">
     <widget class="QLabel" name="longBreakLengthLabel">
      <property name="text">
-      <string>Long break length</string>
+      <string>&amp;Long break length</string>
      </property>
      <property name="buddy">
       <cstring>longBreakLengthInput</cstring>
@@ -144,7 +144,7 @@
    <item row="3" column="0">
     <widget class="QLabel" name="longBreakIntervalLabel">
      <property name="text">
-      <string>Long break after</string>
+      <string>Long break &amp;after</string>
      </property>
      <property name="buddy">
       <cstring>longBreakIntervalInput</cstring>
@@ -180,7 +180,7 @@
    <item row="4" column="0">
     <widget class="QLabel" name="penaltyFactorLabel">
      <property name="text">
-      <string>Penalty factor (0 = no effect)</string>
+      <string>Penalt&amp;y factor (0 = no effect)</string>
      </property>
      <property name="buddy">
       <cstring>penaltyFactorInput</cstring>
@@ -213,7 +213,7 @@
    <item row="5" column="0">
     <widget class="QLabel" name="rewardFactorLabel">
      <property name="text">
-      <string>Reward factor (0 = no effect)</string>
+      <string>&amp;Reward factor (0 = no effect)</string>
      </property>
      <property name="buddy">
       <cstring>rewardFactorInput</cstring>
