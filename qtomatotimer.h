@@ -36,7 +36,8 @@ public:
         POMODORO = 1,
         AWAITBREAK = 2,
         SHORTBREAK = 3,
-        LONGBREAK = 4
+        LONGBREAK = 4,
+        AWAITPOMODORO = 5
     };
 
     /** Proceed when the user clicks the icon. */
