@@ -59,6 +59,8 @@ void QTomatoConfig::save( const QTomatoConfig &pConfig )
   s.setValue( "shortbreaklength", pConfig.mShortBreakLength );
   s.setValue( "longbreaklength", pConfig.mLongBreakLength );
   s.setValue( "longbreakinterval", pConfig.mLongBreakInterval );
+  s.setValue( "penaltyfactor", pConfig.mPenaltyFactor );
+  s.setValue( "rewardfactor", pConfig.mRewardFactor );
 }
 
 QTomatoConfig QTomatoConfig::load()
@@ -70,6 +72,8 @@ QTomatoConfig QTomatoConfig::load()
   config.mShortBreakLength = s.value( "shortbreaklength", config.mShortBreakLength ).toInt();
   config.mLongBreakLength = s.value( "longbreaklength", config.mLongBreakLength ).toInt();
   config.mLongBreakInterval = s.value( "longbreakinterval", config.mLongBreakInterval ).toInt();
+  config.mPenaltyFactor = s.value( "penaltyfactor", config.mPenaltyFactor ).toInt();
+  config.mRewardFactor = s.value( "rewardfactor", config.mRewardFactor ).toInt();
 
   return config;
 }
