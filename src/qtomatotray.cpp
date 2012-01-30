@@ -137,12 +137,12 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
 
 void QTomatoTray::slotShortBreakCompleted()
 {
-  showMessage( tr( "QTomato" ), "Short break is over, click here to start a new pomodoro." );
+  showMessage( tr( "QTomato" ), tr( "Short break is over, click here to start a new pomodoro." ) );
 }
 
 void QTomatoTray::slotLongBreakCompleted()
 {
-  showMessage( tr( "QTomato" ), "Long break is over, click here to start a new pomodoro." );
+  showMessage( tr( "QTomato" ), tr( "Long break is over, click here to start a new pomodoro." ) );
 }
 
 void QTomatoTray::slotQuit()
