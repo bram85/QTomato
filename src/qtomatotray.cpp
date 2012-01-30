@@ -121,7 +121,8 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
   } else if ( state == QTomatoTimer::IDLE ) {
     tooltip = tr( "QTomato - Idle, click the icon to start a new pomodoro." );
   } else if ( state == QTomatoTimer::AWAITBREAK ) {
-    tooltip = tr( "QTomato - Pomodoro finished, click the icon to start the break." );
+    tooltip = tr( "QTomato - Pomodoro finished, click the icon to start a %1 break.", "short or long break" ).arg(
+        mTimer->nextBreakIsLong() ? tr( "long" ) : tr( "short" ) );
   } else {
     Q_ASSERT( "Unknown state." );
   }
