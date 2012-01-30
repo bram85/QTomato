@@ -101,6 +101,7 @@ void QTomatoTimer::reset()
 {
     goIdle();
     mCompleted = 0;
+    mTotalCompleted = 0;
 }
 
 void QTomatoTimer::startTimer( int pSeconds )
