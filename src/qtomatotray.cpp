@@ -118,8 +118,8 @@ void QTomatoTray::updateTooltip( int pSecondsLeft )
         tooltip += tr( "QTomato - %1, %2 seconds left." ).arg( mTimer->getStateString() ).arg( seconds );
       }
     }
-  } else if ( state == QTomatoTimer::IDLE ) {
-    tooltip = tr( "QTomato - Idle, click the icon to start a new pomodoro." );
+  } else if ( state == QTomatoTimer::IDLE || state == QTomatoTimer::AWAITPOMODORO ) {
+    tooltip = tr( "QTomato - %1, click the icon to start a new pomodoro." ).arg( mTimer->getStateString() );
   } else if ( state == QTomatoTimer::AWAITBREAK ) {
     tooltip = tr( "QTomato - Pomodoro finished, click the icon to start a %1 break.", "short or long break" ).arg(
         mTimer->nextBreakIsLong() ? tr( "long" ) : tr( "short" ) );
