@@ -209,6 +209,7 @@ QString QTomatoTimer::stateToString( QTomatoState pState )
     case SHORTBREAK: return tr( "Short break" );
     case LONGBREAK: return tr( "Long break" );
     case AWAITBREAK: return tr( "Awaiting break" );
+    case AWAITPOMODORO: return tr( "Awaiting new pomodoro" );
     default: Q_ASSERT( "Unknown state." );
   }
 
