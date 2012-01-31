@@ -36,7 +36,10 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
 void QTomatoTimer::startPomodoro()
 {
   qDebug() << mSecondsLeft;
-  int penalty = qCeil( -1 * mSecondsLeft * ( qreal( mConfig.mPenaltyFactor ) / 100 ) );
+  int penalty = 0;
+  if ( mSecondsLeft < -10 ) {
+    penalty = qCeil( -1 * mSecondsLeft * ( qreal( mConfig.mPenaltyFactor ) / 100 ) );
+  }
 
   qDebug() << "Starting new pomodoro with length"
            << mConfig.mPomodoroLength + penalty
@@ -54,7 +57,10 @@ void QTomatoTimer::startShortBreak()
 {
   qDebug() << mSecondsLeft;
   // reward overtime
-  int reward = qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 100 ) );
+  int reward = 0;
+  if ( mSecondsLeft <= -10 ) {
+    reward = qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 100 ) );
+  }
 
   qDebug() << "Starting short break with length"
            << mConfig.mShortBreakLength + reward
@@ -72,7 +78,10 @@ void QTomatoTimer::startLongBreak()
 {
   qDebug() << mSecondsLeft;
   // reward overtime
-  int reward = qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 100 ) );
+  int reward = 0;
+  if ( mSecondsLeft <= -10 ) {
+    reward = qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 100 ) );
+  }
 
   qDebug() << "Starting long break with length"
            << mConfig.mLongBreakLength + reward
