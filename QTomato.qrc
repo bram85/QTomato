@@ -1,3 +1,5 @@
 <RCC>
-    <qresource prefix="/icons"/>
+    <qresource prefix="/icons">
+        <file>res/tomato.svg</file>
+    </qresource>
 </RCC>
