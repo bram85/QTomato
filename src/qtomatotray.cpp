@@ -60,6 +60,7 @@ void QTomatoTray::slotStep()
     --mStepLock;
     QTimer::singleShot( 100, this, SLOT( slotReleaseLock() ) );
     mTimer->step();
+    updateTooltip();
   }
 }
 
