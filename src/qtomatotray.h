@@ -33,7 +33,6 @@ public:
     explicit QTomatoTray(QObject *parent = 0);
     
 protected slots:
-    // void slotStartPomodo();
     void slotActivated( QSystemTrayIcon::ActivationReason );
     void slotPomodoroCompleted();
     void slotShortBreakCompleted();
