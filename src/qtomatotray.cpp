@@ -29,7 +29,7 @@
 QTomatoTray::QTomatoTray(QObject *parent) :
     QSystemTrayIcon( QIcon( ":/icons/res/tomato.svg" ), parent)
   , mMenu( 0 )
-  , mStepLock( 1 )
+  , mStepLock( 0 )
 {
     mTimer = new QTomatoTimer( this );
     connect( mTimer, SIGNAL(tick( int)), SLOT( slotTick( int )));
@@ -56,8 +56,8 @@ void QTomatoTray::slotActivated( QSystemTrayIcon::ActivationReason pActivationRe
 void QTomatoTray::slotStep()
 {
   // make sure to call mTimer->step() only once for one event loop pass.
-  if ( mStepLock ) {
-    --mStepLock;
+  if ( mStepLock == 0 ) {
+    ++mStepLock;
     QTimer::singleShot( 100, this, SLOT( slotReleaseLock() ) );
     mTimer->step();
     updateTooltip();
@@ -157,6 +157,7 @@ void QTomatoTray::slotQuit()
 void QTomatoTray::slotRequestConfirmation()
 {
   QString question;
+  ++mStepLock;
 
   switch( mTimer->getState() ) {
     case QTomatoTimer::POMODORO: {
@@ -178,6 +179,7 @@ void QTomatoTray::slotRequestConfirmation()
     mTimer->confirm();
   }
 
+  --mStepLock;
 }
 
 void QTomatoTray::slotShowConfiguration()
@@ -203,7 +205,7 @@ void QTomatoTray::slotReset()
 
 void QTomatoTray::slotReleaseLock()
 {
-  mStepLock = 1;
+  --mStepLock;
 }
 
 void QTomatoTray::slotAbout()
