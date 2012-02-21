@@ -18,7 +18,6 @@
 */
 
 #include <QCoreApplication>
-#include <QMenu>
 #include <QMessageBox>
 
 #include "qtomatoconfigdialog.h"

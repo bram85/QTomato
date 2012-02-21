@@ -20,9 +20,8 @@
 #ifndef QTOMATOTRAY_H
 #define QTOMATOTRAY_H
 
+#include <QMenu>
 #include <QSystemTrayIcon>
-
-class QMenu;
 
 class QTomatoTimer;
 
