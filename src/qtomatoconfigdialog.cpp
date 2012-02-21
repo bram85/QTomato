@@ -17,6 +17,8 @@
  * along with QTomato.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "qtomatoconfig.h"
+
 #include "qtomatoconfigdialog.h"
 #include "ui_qtomatoconfigdialog.h"
 

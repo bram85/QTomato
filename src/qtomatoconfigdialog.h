@@ -22,7 +22,7 @@
 
 #include <QDialog>
 
-#include "qtomatoconfig.h"
+class QTomatoConfig;
 
 namespace Ui {
 class QTomatoConfigDialog;
