@@ -50,8 +50,8 @@ void QTomatoTimer::startPomodoro()
            << penalty
            << ")";
 
-  startTimer( mConfig.mPomodoroLength + penalty );
   mState = QTomatoTimer::POMODORO;
+  startTimer( mConfig.mPomodoroLength + penalty );
 }
 
 void QTomatoTimer::startShortBreak()
@@ -72,8 +72,8 @@ void QTomatoTimer::startShortBreak()
            << reward
            << ")";
 
-  startTimer( mConfig.mShortBreakLength + reward );
   mState = QTomatoTimer::SHORTBREAK;
+  startTimer( mConfig.mShortBreakLength + reward );
 }
 
 void QTomatoTimer::startLongBreak()
@@ -94,8 +94,8 @@ void QTomatoTimer::startLongBreak()
            << reward
            << ")";
 
-  startTimer( mConfig.mLongBreakLength + reward );
   mState = QTomatoTimer::LONGBREAK;
+  startTimer( mConfig.mLongBreakLength + reward );
 }
 
 void QTomatoTimer::goIdle()
@@ -120,6 +120,7 @@ void QTomatoTimer::startTimer( int pSeconds )
 {
   mTimer.start( 1000 );
   mSecondsLeft = pSeconds;
+  emit tick( mSecondsLeft );
 }
 
 void QTomatoTimer::slotTick()
