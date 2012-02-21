@@ -40,6 +40,7 @@ protected slots:
     void slotQuit();
     void slotRequestConfirmation();
     void slotShowConfiguration();
+    void slotIdle();
     void slotReset();
     void slotStep();
     void slotReleaseLock();

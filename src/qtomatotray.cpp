@@ -88,8 +88,10 @@ void QTomatoTray::buildMenu()
 	}
 
   QAction *a;
-    a = mMenu->addAction( tr( "&Reset" ) );
-	connect( a, SIGNAL( triggered()), SLOT( slotReset()) );
+  a = mMenu->addAction( tr( "&Idle" ) );
+  connect( a, SIGNAL( triggered()), SLOT( slotIdle() ) );
+  a = mMenu->addAction( tr( "&Reset" ) );
+  connect( a, SIGNAL( triggered()), SLOT( slotReset()) );
   mMenu->addSeparator();
   a = mMenu->addAction( tr( "&Settings..." ) );
   connect( a, SIGNAL( triggered()), SLOT( slotShowConfiguration() ) );
@@ -216,4 +218,38 @@ void QTomatoTray::slotAbout()
   text += "Bram Schoenmakers <me@bramschoenmakers.nl>";
 
   QMessageBox::about( 0, tr( "About QTomato" ), text );
+}
+
+void QTomatoTray::slotIdle()
+{
+  QString question;
+
+  switch( mTimer->getState() ) {
+    case QTomatoTimer::POMODORO: {
+      question = tr( "Do you want to abort this pomodoro?" );
+      break;
+    }
+    case QTomatoTimer::SHORTBREAK: {
+      question = tr( "Do you want to abort your short break?" );
+      break;
+    }
+    case QTomatoTimer::LONGBREAK: {
+      question = tr( "Do you want to abort your long break?" );
+      break;
+    }
+    case QTomatoTimer::AWAITBREAK:
+    case QTomatoTimer::AWAITPOMODORO: {
+      question = tr( "Do you want QTomato to go idle?" );
+      break;
+    }
+    case QTomatoTimer::IDLE: {
+      // do nothing
+      return;
+    }
+    default: Q_ASSERT( "There's no question to ask in this state." );
+  }
+
+  if ( QMessageBox::question( 0, tr( "QTomato" ), question, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes ) {
+    mTimer->goIdle();
+  }
 }

@@ -21,15 +21,19 @@ digraph {
   AwaitBreak -> ShortBreak [ label = "click, completed < 4" ];
   AwaitBreak -> LongBreak [ label = "click, completed = 4" ];
   AwaitBreak -> Idle [ label = "reset, completed := 0" ];
+  AwaitBreak -> Idle [ label = "idle" ];
 
   ShortBreak -> AwaitPomodoro [ label = "5 min" ];
   ShortBreak -> Idle [ label = "reset, completed := 0" ];
   ShortBreak -> Pomodoro[ label = "click*"  ];
+  ShortBreak -> Idle [ label="idle" ];
 
   LongBreak -> AwaitPomodoro [ label = "15 min, completed := 0" ];
   LongBreak -> Idle [ label = "reset, completed := 0" ];
   LongBreak -> Pomodoro [ label = "click*, completed := 0" ];
+  LongBreak -> Idle [ label="idle" ];
 
   AwaitPomodoro -> Pomodoro [ label = "click" ];
   AwaitPomodoro -> Idle [ label = "reset, completed := 0" ];
+  AwaitPomodoro -> Idle [ label = "idle" ];
 }

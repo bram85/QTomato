@@ -49,6 +49,9 @@ public:
     /** Reset the timer. */
     void reset();
 
+    /** Go to idle state. This won't affect the stats. */
+    void goIdle();
+
     QTomatoState getState() const;
     QString getStateString() const;
     static QString stateToString( QTomatoState pState );
@@ -80,7 +83,6 @@ protected:
     void startPomodoro();
     void startShortBreak();
     void startLongBreak();
-    void goIdle();
 
 private:
     QTomatoConfig mConfig;
