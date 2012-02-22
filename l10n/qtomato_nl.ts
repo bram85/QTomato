@@ -54,29 +54,34 @@
 <context>
     <name>QTomatoTimer</name>
     <message>
-        <location filename="../src/qtomatotimer.cpp" line="206"/>
+        <location filename="../src/qtomatotimer.cpp" line="220"/>
         <source>Idle</source>
         <translation>Inactief</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotimer.cpp" line="207"/>
+        <location filename="../src/qtomatotimer.cpp" line="221"/>
         <source>Pomodoro</source>
         <translation>Pomodoro</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotimer.cpp" line="208"/>
+        <location filename="../src/qtomatotimer.cpp" line="222"/>
         <source>Short break</source>
         <translation>Korte pauze</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotimer.cpp" line="209"/>
+        <location filename="../src/qtomatotimer.cpp" line="223"/>
         <source>Long break</source>
         <translation>Lange pauze</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotimer.cpp" line="210"/>
+        <location filename="../src/qtomatotimer.cpp" line="224"/>
         <source>Awaiting break</source>
         <translation>Wachten op pauze</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotimer.cpp" line="225"/>
+        <source>Awaiting new pomodoro</source>
+        <translation>Wachten op nieuwe pomodoro</translation>
     </message>
 </context>
 <context>
@@ -93,56 +98,96 @@
     </message>
     <message>
         <location filename="../src/qtomatotray.cpp" line="81"/>
-        <location filename="../src/qtomatotray.cpp" line="140"/>
-        <location filename="../src/qtomatotray.cpp" line="145"/>
-        <location filename="../src/qtomatotray.cpp" line="150"/>
-        <location filename="../src/qtomatotray.cpp" line="175"/>
-        <location filename="../src/qtomatotray.cpp" line="197"/>
+        <location filename="../src/qtomatotray.cpp" line="143"/>
+        <location filename="../src/qtomatotray.cpp" line="148"/>
+        <location filename="../src/qtomatotray.cpp" line="153"/>
+        <location filename="../src/qtomatotray.cpp" line="179"/>
+        <location filename="../src/qtomatotray.cpp" line="202"/>
+        <location filename="../src/qtomatotray.cpp" line="252"/>
         <source>QTomato</source>
         <translation>QTomato</translation>
     </message>
     <message>
         <location filename="../src/qtomatotray.cpp" line="91"/>
+        <source>&amp;Idle</source>
+        <translation>&amp;Stop</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="93"/>
         <source>&amp;Reset</source>
         <translation>&amp;Reset</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="94"/>
+        <location filename="../src/qtomatotray.cpp" line="96"/>
         <source>&amp;Settings...</source>
         <translation>In&amp;stellingen...</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="97"/>
+        <location filename="../src/qtomatotray.cpp" line="99"/>
         <source>&amp;About QTomato...</source>
         <translation>Over QTom&amp;ato...</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="99"/>
+        <location filename="../src/qtomatotray.cpp" line="101"/>
         <source>&amp;Quit</source>
         <translation>A&amp;fsluiten</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="116"/>
+        <location filename="../src/qtomatotray.cpp" line="118"/>
         <source>QTomato - %1, %2 minutes and %3 seconds left.</source>
         <translation>QTomato - %1, %2 minuten en %3 seconden over.</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="118"/>
+        <location filename="../src/qtomatotray.cpp" line="120"/>
         <source>QTomato - %1, %2 seconds left.</source>
         <translation>QTomato - %1, %2 seconden over.</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="122"/>
-        <source>QTomato - Idle, click the icon to start a new pomodoro.</source>
-        <translation>QTomato - Inactief, klik op het pictogram om een nieuwe pomodoro te starten.</translation>
+        <location filename="../src/qtomatotray.cpp" line="124"/>
+        <source>QTomato - %1, click the icon to start a new pomodoro.</source>
+        <translation>QTomato - %1, klik op het pictogram om een nieuwe pomodoro te beginnen.</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="124"/>
+        <location filename="../src/qtomatotray.cpp" line="126"/>
+        <source>QTomato - Pomodoro finished, click the icon to start a %1 break.</source>
+        <comment>short or long break</comment>
+        <translation>QTomato - Pomodoro beëindigd, klik op het pictogram om een %1 pauze te beginnen.</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="127"/>
+        <source>long</source>
+        <translation>lange</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="127"/>
+        <source>short</source>
+        <translation>korte</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="233"/>
+        <source>Do you want to abort your short break?</source>
+        <translation>Wilt u de korte pauze afbreken?</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="237"/>
+        <source>Do you want to abort your long break?</source>
+        <translation>Wilt u de lange pauze afbreken?</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="242"/>
+        <source>Do you want QTomato to go idle?</source>
+        <translation>Wilt u dat QTomato inactief wordt?</translation>
+    </message>
+    <message>
+        <source>QTomato - Idle, click the icon to start a new pomodoro.</source>
+        <translation type="obsolete">QTomato - Inactief, klik op het pictogram om een nieuwe pomodoro te starten.</translation>
+    </message>
+    <message>
         <source>QTomato - Pomodoro finished, click the icon to start the break.</source>
-        <translation>QTomato - Pomodoro voltooid, klik op het pictogram om de pauze te beginnen.</translation>
+        <translation type="obsolete">QTomato - Pomodoro voltooid, klik op het pictogram om de pauze te beginnen.</translation>
     </message>
     <message numerus="yes">
-        <location filename="../src/qtomatotray.cpp" line="132"/>
+        <location filename="../src/qtomatotray.cpp" line="135"/>
         <source>%n pomodoro(s) completed.</source>
         <translation>
             <numerusform>%n pomodoro voltooid.</numerusform>
@@ -150,37 +195,48 @@
         </translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="150"/>
+        <location filename="../src/qtomatotray.cpp" line="143"/>
+        <source>Short break is over, click here to start a new pomodoro.</source>
+        <translation>Korte pauze is voorbij, klik hier om een nieuwe pomodoro te beginnen.</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="148"/>
+        <source>Long break is over, click here to start a new pomodoro.</source>
+        <translation>Lange pauze is voorbij, klik hier om een nieuwe pomodoro te beginnen.</translation>
+    </message>
+    <message>
+        <location filename="../src/qtomatotray.cpp" line="153"/>
         <source>Do you want to quit QTomato?</source>
         <translation>Wilt u QTomato afsluiten?</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="161"/>
+        <location filename="../src/qtomatotray.cpp" line="165"/>
+        <location filename="../src/qtomatotray.cpp" line="229"/>
         <source>Do you want to abort this pomodoro?</source>
         <translation>Wilt u deze pomodoro afbreken?</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="165"/>
+        <location filename="../src/qtomatotray.cpp" line="169"/>
         <source>Do you want to abort your short break and start a new pomodoro?</source>
         <translation>Wilt u deze korte pauze afbreken en een nieuwe pomodoro beginnen?</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="169"/>
+        <location filename="../src/qtomatotray.cpp" line="173"/>
         <source>Do you want to abort your long break and start a new pomodoro?</source>
         <translation>Wilt u deze lange pauze afbreken en een nieuwe pomodoro beginnen?</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="197"/>
+        <location filename="../src/qtomatotray.cpp" line="202"/>
         <source>Do you want to reset QTomato? All completed pomodoros will be lost.</source>
         <translation>Wilt u QTomato resetten? Alle voltooide pomodoro&apos;s gaan hierbij verloren.</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="209"/>
+        <location filename="../src/qtomatotray.cpp" line="214"/>
         <source>QTomato %1</source>
         <translation>QTomato %1</translation>
     </message>
     <message>
-        <location filename="../src/qtomatotray.cpp" line="215"/>
+        <location filename="../src/qtomatotray.cpp" line="220"/>
         <source>About QTomato</source>
         <translation>Over QTomato</translation>
     </message>
