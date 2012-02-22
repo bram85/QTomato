@@ -9,6 +9,7 @@ QT       += core gui
 TARGET = QTomato
 TEMPLATE = app
 
+include( l10n/l10n.pri )
 
 SOURCES += src/main.cpp \
     src/qtomatotray.cpp \
@@ -27,6 +28,3 @@ RESOURCES += \
 
 FORMS += \
     src/qtomatoconfigdialog.ui
-
-TRANSLATIONS += \
-    l10n/qtomato_nl.ts
