@@ -144,7 +144,6 @@ void QTomatoTimer::slotTick()
       }
       case QTomatoTimer::LONGBREAK: {
         mState = AWAITPOMODORO;
-        mCompleted = 0;
         emit longBreakCompleted();
         break;
       }
@@ -179,6 +178,7 @@ void QTomatoTimer::step()
       if ( mCompleted < mConfig.mLongBreakInterval ) {
         startShortBreak();
       } else {
+        mCompleted = 0;
         startLongBreak();
       }
       break;
