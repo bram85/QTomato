@@ -18,6 +18,8 @@
 */
 
 #include <QtGui/QApplication>
+#include <QTranslator>
+
 #include "qtomatotray.h"
 
 static const QString sAppname = "QTomato";
@@ -34,6 +36,12 @@ int main(int argc, char *argv[])
     a.setApplicationVersion( sVersion );
     a.setOrganizationName( sOrganization );
     a.setOrganizationDomain( sDomain );
+
+    // load translations
+    QTranslator translator;
+    if ( translator.load( ":/l10n/qtomato.qm" ) ) {
+      a.installTranslator( &translator );
+    }
 
     QTomatoTray qtt;
 

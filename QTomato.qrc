@@ -2,4 +2,7 @@
     <qresource prefix="/icons">
         <file>res/tomato.svg</file>
     </qresource>
+    <qresource prefix="/l10n" lang="nl">
+        <file alias="qtomato.qm">l10n/qtomato_nl.qm</file>
+    </qresource>
 </RCC>
