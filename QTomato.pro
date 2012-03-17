@@ -26,5 +26,8 @@ HEADERS  += \
 RESOURCES += \
     QTomato.qrc
 
+RC_FILE += \
+    res/qtomato.rc
+
 FORMS += \
     src/qtomatoconfigdialog.ui
