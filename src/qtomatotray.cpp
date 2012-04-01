@@ -19,6 +19,7 @@
 
 #include <QCoreApplication>
 #include <QMessageBox>
+#include <QPainter>
 
 #include "qtomatoconfigdialog.h"
 #include "qtomatotimer.h"
@@ -31,7 +32,7 @@ QTomatoTray::QTomatoTray(QObject *parent) :
   , mStepLock( 0 )
 {
     mTimer = new QTomatoTimer( this );
-    connect( mTimer, SIGNAL(tick( int)), SLOT( slotTick( int )));
+    connect( mTimer, SIGNAL(tick( int, int ) ), SLOT( slotTick( int, int )));
     connect( mTimer, SIGNAL(pomodoroCompleted()), SLOT( slotPomodoroCompleted() ) );
     connect( mTimer, SIGNAL(shortBreakCompleted()), SLOT( slotShortBreakCompleted()) );
     connect( mTimer, SIGNAL(longBreakCompleted()), SLOT( slotLongBreakCompleted()) );
@@ -42,6 +43,7 @@ QTomatoTray::QTomatoTray(QObject *parent) :
 
     buildMenu();
     updateTooltip();
+    updateIcon();
     show();
 }
 
@@ -62,15 +64,35 @@ void QTomatoTray::slotStep()
   }
 }
 
-void QTomatoTray::slotTick( int pSecondsLeft )
+void QTomatoTray::slotTick( int pSecondsLeft, int pTotal )
 {
   updateTooltip( pSecondsLeft );
-  updateIcon( pSecondsLeft );
+  updateIcon( pSecondsLeft, pTotal );
 }
 
-void QTomatoTray::updateIcon( int pSecondsLeft )
+void QTomatoTray::updateIcon( int pSecondsLeft, int pTotal )
 {
-    // TODO
+  static QIcon icon( ":/icons/res/tomato.svg" );
+  static QPixmap base = icon.pixmap( 64, 64 );
+
+  QPixmap pm = base;
+
+  if ( pSecondsLeft != -1 ) {
+    // turn to gray
+    QPainter p( &pm );
+
+    // no border
+    QPen pen = p.pen();
+    pen.setWidth( 0 );
+    p.setPen( pen );
+
+    p.setCompositionMode( QPainter::CompositionMode_SourceAtop );
+
+    int height = qRound( 64 * pSecondsLeft / pTotal );
+    p.fillRect( 0, 0, 64, height, QColor( 0, 0, 0, 128 ) );
+  }
+
+  setIcon( QIcon( pm ) );
 }
 
 void QTomatoTray::slotPomodoroCompleted()

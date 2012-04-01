@@ -26,6 +26,7 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
     QObject(parent)
   , mState( QTomatoTimer::IDLE )
   , mSecondsLeft( 0 )
+  , mTotalSeconds( 0 )
   , mCompleted( 0 )
   , mTotalCompleted( 0 )
 {
@@ -106,7 +107,7 @@ void QTomatoTimer::goIdle()
   mState = IDLE;
   mSecondsLeft = 0;
 
-  emit tick( -1 );
+  emit tick( -1, 0 );
 }
 
 void QTomatoTimer::reset()
@@ -120,13 +121,14 @@ void QTomatoTimer::startTimer( int pSeconds )
 {
   mTimer.start( 1000 );
   mSecondsLeft = pSeconds;
-  emit tick( mSecondsLeft );
+  mTotalSeconds = pSeconds;
+  emit tick( mSecondsLeft, mTotalSeconds );
 }
 
 void QTomatoTimer::slotTick()
 {
   --mSecondsLeft;
-  emit tick( mSecondsLeft );
+  emit tick( qMax( 0, mSecondsLeft ), mTotalSeconds );
 
   if ( mSecondsLeft == 0 ) {
     switch ( mState ) {

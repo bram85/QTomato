@@ -36,7 +36,7 @@ protected slots:
     void slotPomodoroCompleted();
     void slotShortBreakCompleted();
     void slotLongBreakCompleted();
-    void slotTick( int pSecondsLeft );
+    void slotTick( int pSecondsLeft, int pTotal );
     void slotQuit();
     void slotRequestConfirmation();
     void slotShowConfiguration();
@@ -48,7 +48,7 @@ protected slots:
 
 protected:
     void buildMenu();
-    void updateIcon(int pSecondsLeft);
+    void updateIcon( int pSecondsLeft = -1, int pTotal = 0 );
     void updateTooltip( int pSecondsLeft = -1 );
 
 private:

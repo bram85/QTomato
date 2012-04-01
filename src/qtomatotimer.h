@@ -68,7 +68,7 @@ signals:
     /**
       * Emit a tick, passing along the number of seconds left.
       */
-    void tick( int );
+    void tick( int, int );
     void pomodoroCompleted();
     void shortBreakCompleted();
     void longBreakCompleted();
@@ -88,6 +88,7 @@ private:
     QTomatoConfig mConfig;
     QTomatoState mState;
     int mSecondsLeft;
+    int mTotalSeconds;
     int mCompleted;
     int mTotalCompleted;
 
