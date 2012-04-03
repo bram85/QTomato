@@ -88,8 +88,8 @@ void QTomatoTray::updateIcon( int pSecondsLeft, int pTotal )
 
     p.setCompositionMode( QPainter::CompositionMode_SourceAtop );
 
-    int height = qRound( 64 * pSecondsLeft / pTotal );
-    p.fillRect( 0, 0, 64, height, QColor( 0, 0, 0, 128 ) );
+    int width = qRound( 64 * pSecondsLeft / pTotal );
+    p.fillRect( 64 - width, 0, width, 64, QColor( 0, 0, 0, 128 ) );
   }
 
   setIcon( QIcon( pm ) );
