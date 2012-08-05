@@ -39,7 +39,7 @@ void QTomatoTimer::startPomodoro()
   qDebug() << mSecondsLeft;
   int penalty = 0;
   if ( mSecondsLeft < -10 ) {
-    // with qMin we make sure that the penalty cannot cause a pomodoro to take longer than 2*pomodoreLength.
+    // with qMin we make sure that the penalty cannot cause a pomodoro to take longer than 2*pomodoroLength.
     penalty = qMin( mConfig.mPomodoroLength, qCeil( -1 * mSecondsLeft * ( qreal( mConfig.mPenaltyFactor ) / 100 ) ) );
   }
 
