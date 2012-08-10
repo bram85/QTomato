@@ -21,6 +21,7 @@
 #include <QMessageBox>
 #include <QPainter>
 
+#include "qtomatoconfig.h"
 #include "qtomatoconfigdialog.h"
 #include "qtomatotimer.h"
 
@@ -208,11 +209,11 @@ void QTomatoTray::slotShowConfiguration()
 {
   QTomatoConfigDialog *qcd = new QTomatoConfigDialog();
 
-  qcd->setConfig( mTimer->getConfig() );
+  qcd->setConfig();
   if ( qcd->exec() == QDialog::Accepted ) {
-    QTomatoConfig config = qcd->getConfig();
-    mTimer->setConfig( config );
-    QTomatoConfig::save( config );
+    qcd->getConfig();
+    mTimer->reset();
+    QTomatoConfig::instance()->save();
   }
 
   delete qcd;

@@ -23,11 +23,10 @@
 class QTomatoConfig
 {
 public:
-  QTomatoConfig();
-  void operator=( const QTomatoConfig &pConfig );
+  static QTomatoConfig *instance();
 
-  static void save( const QTomatoConfig &pConfig );
-  static QTomatoConfig load();
+  void save() const;
+  void load();
 
   int mPomodoroLength;
   int mShortBreakLength;
@@ -36,6 +35,8 @@ public:
 
   int mPenaltyFactor;
   int mRewardFactor;
+private:
+  QTomatoConfig();
 };
 
 #endif // QTOMATOCONFIG_H

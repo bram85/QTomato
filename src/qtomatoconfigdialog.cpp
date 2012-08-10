@@ -40,26 +40,26 @@ QTomatoConfigDialog::~QTomatoConfigDialog()
     delete ui;
 }
 
-QTomatoConfig QTomatoConfigDialog::getConfig() const
+void QTomatoConfigDialog::getConfig() const
 {
-  QTomatoConfig config;
+  QTomatoConfig *config = QTomatoConfig::instance();
 
-  config.mPomodoroLength = ui->pomodoroLengthInput->value() * sDebugFactor;
-  config.mShortBreakLength = ui->shortBreakLengthInput->value() * sDebugFactor;
-  config.mLongBreakLength = ui->longBreakLengthInput->value() * sDebugFactor;
-  config.mLongBreakInterval = ui->longBreakIntervalInput->value();
-  config.mPenaltyFactor = qRound( ui->penaltyFactorInput->value() * 100 ) ;
-  config.mRewardFactor = qRound( ui->rewardFactorInput->value() * 100 );
-
-  return config;
+  config->mPomodoroLength = ui->pomodoroLengthInput->value() * sDebugFactor;
+  config->mShortBreakLength = ui->shortBreakLengthInput->value() * sDebugFactor;
+  config->mLongBreakLength = ui->longBreakLengthInput->value() * sDebugFactor;
+  config->mLongBreakInterval = ui->longBreakIntervalInput->value();
+  config->mPenaltyFactor = qRound( ui->penaltyFactorInput->value() * 100 ) ;
+  config->mRewardFactor = qRound( ui->rewardFactorInput->value() * 100 );
 }
 
-void QTomatoConfigDialog::setConfig(QTomatoConfig pConfig)
+void QTomatoConfigDialog::setConfig()
 {
-  ui->pomodoroLengthInput->setValue( pConfig.mPomodoroLength / sDebugFactor );
-  ui->shortBreakLengthInput->setValue( pConfig.mShortBreakLength / sDebugFactor );
-  ui->longBreakLengthInput->setValue( pConfig.mLongBreakLength / sDebugFactor );
-  ui->longBreakIntervalInput->setValue( pConfig.mLongBreakInterval );
-  ui->penaltyFactorInput->setValue( qreal( pConfig.mPenaltyFactor ) / 100 );
-  ui->rewardFactorInput->setValue( qreal( pConfig.mRewardFactor ) / 100 );
+  QTomatoConfig *config = QTomatoConfig::instance();
+
+  ui->pomodoroLengthInput->setValue( config->mPomodoroLength / sDebugFactor );
+  ui->shortBreakLengthInput->setValue( config->mShortBreakLength / sDebugFactor );
+  ui->longBreakLengthInput->setValue( config->mLongBreakLength / sDebugFactor );
+  ui->longBreakIntervalInput->setValue( config->mLongBreakInterval );
+  ui->penaltyFactorInput->setValue( qreal( config->mPenaltyFactor ) / 100 );
+  ui->rewardFactorInput->setValue( qreal( config->mRewardFactor ) / 100 );
 }

@@ -36,8 +36,8 @@ public:
     explicit QTomatoConfigDialog(QWidget *parent = 0);
     ~QTomatoConfigDialog();
 
-    QTomatoConfig getConfig() const;
-    void setConfig( QTomatoConfig pConfig );
+    void getConfig() const;
+    void setConfig();
     
 private:
     Ui::QTomatoConfigDialog *ui;

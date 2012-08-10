@@ -23,7 +23,7 @@
 #include <QObject>
 #include <QTimer>
 
-#include "qtomatoconfig.h"
+class QTomatoConfig;
 
 class QTomatoTimer : public QObject
 {
@@ -58,11 +58,7 @@ public:
 
     bool nextBreakIsLong() const;
 
-    QTomatoConfig getConfig() const;
-    void setConfig( QTomatoConfig pConfig );
-
     int getCompleted() const;
-
 
 signals:
     /**
@@ -85,7 +81,7 @@ protected:
     void startLongBreak();
 
 private:
-    QTomatoConfig mConfig;
+    QTomatoConfig *mConfig;
     QTomatoState mState;
     int mSecondsLeft;
     int mTotalSeconds;

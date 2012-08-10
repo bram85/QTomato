@@ -20,6 +20,8 @@
 #include <qmath.h>
 #include <QDebug>
 
+#include "qtomatoconfig.h"
+
 #include "qtomatotimer.h"
 
 QTomatoTimer::QTomatoTimer(QObject *parent) :
@@ -30,7 +32,7 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
   , mCompleted( 0 )
   , mTotalCompleted( 0 )
 {
-  mConfig = QTomatoConfig::load();
+  mConfig = QTomatoConfig::instance();
   connect( &mTimer, SIGNAL(timeout()), SLOT(slotTick()));
 }
 
@@ -40,19 +42,19 @@ void QTomatoTimer::startPomodoro()
   int penalty = 0;
   if ( mSecondsLeft < -10 ) {
     // with qMin we make sure that the penalty cannot cause a pomodoro to take longer than 2*pomodoroLength.
-    penalty = qMin( mConfig.mPomodoroLength, qCeil( -1 * mSecondsLeft * ( qreal( mConfig.mPenaltyFactor ) / 100 ) ) );
+    penalty = qMin( mConfig->mPomodoroLength, qCeil( -1 * mSecondsLeft * ( qreal( mConfig->mPenaltyFactor ) / 100 ) ) );
   }
 
   qDebug() << "Starting new pomodoro with length"
-           << mConfig.mPomodoroLength + penalty
+           << mConfig->mPomodoroLength + penalty
            << "("
-           << mConfig.mPomodoroLength
+           << mConfig->mPomodoroLength
            << "+"
            << penalty
            << ")";
 
   mState = QTomatoTimer::POMODORO;
-  startTimer( mConfig.mPomodoroLength + penalty );
+  startTimer( mConfig->mPomodoroLength + penalty );
 }
 
 void QTomatoTimer::startShortBreak()
@@ -62,19 +64,19 @@ void QTomatoTimer::startShortBreak()
   int reward = 0;
   if ( mSecondsLeft <= -10 ) {
     // with qMin it is made sure the break is not longer than 2*short break length.
-    reward = qMin( mConfig.mShortBreakLength, qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 100 ) ) );
+    reward = qMin( mConfig->mShortBreakLength, qFloor( -1 * mSecondsLeft * ( qreal( mConfig->mRewardFactor ) / 100 ) ) );
   }
 
   qDebug() << "Starting short break with length"
-           << mConfig.mShortBreakLength + reward
+           << mConfig->mShortBreakLength + reward
            << "("
-           << mConfig.mShortBreakLength
+           << mConfig->mShortBreakLength
            << "+"
            << reward
            << ")";
 
   mState = QTomatoTimer::SHORTBREAK;
-  startTimer( mConfig.mShortBreakLength + reward );
+  startTimer( mConfig->mShortBreakLength + reward );
 }
 
 void QTomatoTimer::startLongBreak()
@@ -84,19 +86,19 @@ void QTomatoTimer::startLongBreak()
   int reward = 0;
   if ( mSecondsLeft <= -10 ) {
     // with qMin it is made sure the break is not longer than 2*long break length.
-    reward = qMin( mConfig.mLongBreakLength, qFloor( -1 * mSecondsLeft * ( qreal( mConfig.mRewardFactor ) / 100 ) ) );
+    reward = qMin( mConfig->mLongBreakLength, qFloor( -1 * mSecondsLeft * ( qreal( mConfig->mRewardFactor ) / 100 ) ) );
   }
 
   qDebug() << "Starting long break with length"
-           << mConfig.mLongBreakLength + reward
+           << mConfig->mLongBreakLength + reward
            << "("
-           << mConfig.mLongBreakLength
+           << mConfig->mLongBreakLength
            << "+"
            << reward
            << ")";
 
   mState = QTomatoTimer::LONGBREAK;
-  startTimer( mConfig.mLongBreakLength + reward );
+  startTimer( mConfig->mLongBreakLength + reward );
 }
 
 void QTomatoTimer::goIdle()
@@ -177,7 +179,7 @@ void QTomatoTimer::step()
       break;
     }
     case AWAITBREAK: {
-      if ( mCompleted < mConfig.mLongBreakInterval ) {
+      if ( mCompleted < mConfig->mLongBreakInterval ) {
         startShortBreak();
       } else {
         mCompleted = 0;
@@ -233,18 +235,7 @@ QString QTomatoTimer::stateToString( QTomatoState pState )
 
 bool QTomatoTimer::nextBreakIsLong() const
 {
-  return mCompleted == mConfig.mLongBreakInterval;
-}
-
-void QTomatoTimer::setConfig( QTomatoConfig pConfig )
-{
-  mConfig = pConfig;
-  reset();
-}
-
-QTomatoConfig QTomatoTimer::getConfig() const
-{
-  return mConfig;
+  return mCompleted == mConfig->mLongBreakInterval;
 }
 
 int QTomatoTimer::getCompleted() const

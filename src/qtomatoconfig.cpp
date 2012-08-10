@@ -27,6 +27,8 @@
   static const QString gSuffix = "-dbg";
 #endif
 
+static QTomatoConfig *gInstance = 0;
+
 QTomatoConfig::QTomatoConfig()
 {
 #ifdef QT_NO_DEBUG
@@ -43,43 +45,37 @@ QTomatoConfig::QTomatoConfig()
 
   mPenaltyFactor = 0;
   mRewardFactor = 0;
+
 }
 
-void QTomatoConfig::operator=( const QTomatoConfig &pConfig )
-{
-  mPomodoroLength = pConfig.mPomodoroLength;
-  mShortBreakLength = pConfig.mShortBreakLength;
-  mLongBreakLength = pConfig.mLongBreakLength;
+QTomatoConfig *QTomatoConfig::instance() {
+  if ( !gInstance ) {
+    gInstance = new QTomatoConfig();
+    gInstance->load();
+  }
 
-  mLongBreakInterval = pConfig.mLongBreakInterval;
-
-  mPenaltyFactor = pConfig.mPenaltyFactor;
-  mRewardFactor = pConfig.mRewardFactor;
+  return gInstance;
 }
 
-void QTomatoConfig::save( const QTomatoConfig &pConfig )
+void QTomatoConfig::save() const
 {
   QSettings s;
 
-  s.setValue( "pomodorolength" + gSuffix, pConfig.mPomodoroLength );
-  s.setValue( "shortbreaklength" + gSuffix, pConfig.mShortBreakLength );
-  s.setValue( "longbreaklength" + gSuffix, pConfig.mLongBreakLength );
-  s.setValue( "longbreakinterval" + gSuffix, pConfig.mLongBreakInterval );
-  s.setValue( "penaltyfactor" + gSuffix, pConfig.mPenaltyFactor );
-  s.setValue( "rewardfactor" + gSuffix, pConfig.mRewardFactor );
+  s.setValue( "pomodorolength" + gSuffix, mPomodoroLength );
+  s.setValue( "shortbreaklength" + gSuffix, mShortBreakLength );
+  s.setValue( "longbreaklength" + gSuffix, mLongBreakLength );
+  s.setValue( "longbreakinterval" + gSuffix, mLongBreakInterval );
+  s.setValue( "penaltyfactor" + gSuffix, mPenaltyFactor );
+  s.setValue( "rewardfactor" + gSuffix, mRewardFactor );
 }
 
-QTomatoConfig QTomatoConfig::load()
+void QTomatoConfig::load()
 {
   QSettings s;
-  QTomatoConfig config;
 
-  config.mPomodoroLength = s.value( "pomodorolength" + gSuffix, config.mPomodoroLength ).toInt();
-  config.mShortBreakLength = s.value( "shortbreaklength" + gSuffix, config.mShortBreakLength ).toInt();
-  config.mLongBreakLength = s.value( "longbreaklength" + gSuffix, config.mLongBreakLength ).toInt();
-  config.mLongBreakInterval = s.value( "longbreakinterval" + gSuffix, config.mLongBreakInterval ).toInt();
-  config.mPenaltyFactor = s.value( "penaltyfactor" + gSuffix, config.mPenaltyFactor ).toInt();
-  config.mRewardFactor = s.value( "rewardfactor" + gSuffix, config.mRewardFactor ).toInt();
-
-  return config;
+  mPomodoroLength = s.value( "pomodorolength" + gSuffix, mPomodoroLength ).toInt();
+  mShortBreakLength = s.value( "shortbreaklength" + gSuffix, mShortBreakLength ).toInt();
+  mLongBreakLength = s.value( "longbreaklength" + gSuffix, mLongBreakLength ).toInt();
+  mLongBreakInterval = s.value( "longbreakinterval" + gSuffix, mLongBreakInterval ).toInt();
+  mPenaltyFactor = s.value( "penaltyfactor" + gSuffix, mPenaltyFactor ).toInt();
 }
