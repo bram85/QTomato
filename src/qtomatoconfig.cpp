@@ -46,6 +46,7 @@ QTomatoConfig::QTomatoConfig()
   mPenaltyFactor = 0;
   mRewardFactor = 0;
 
+  mPulseIcon = true;
 }
 
 QTomatoConfig *QTomatoConfig::instance() {
@@ -67,6 +68,7 @@ void QTomatoConfig::save() const
   s.setValue( "longbreakinterval" + gSuffix, mLongBreakInterval );
   s.setValue( "penaltyfactor" + gSuffix, mPenaltyFactor );
   s.setValue( "rewardfactor" + gSuffix, mRewardFactor );
+  s.setValue( "pulseIcon" + gSuffix, mPulseIcon );
 }
 
 void QTomatoConfig::load()
@@ -78,4 +80,5 @@ void QTomatoConfig::load()
   mLongBreakLength = s.value( "longbreaklength" + gSuffix, mLongBreakLength ).toInt();
   mLongBreakInterval = s.value( "longbreakinterval" + gSuffix, mLongBreakInterval ).toInt();
   mPenaltyFactor = s.value( "penaltyfactor" + gSuffix, mPenaltyFactor ).toInt();
+  mPulseIcon = s.value( "pulseIcon" + gSuffix, mPulseIcon ).toBool();
 }

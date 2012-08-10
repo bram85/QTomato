@@ -35,6 +35,8 @@ public:
 
   int mPenaltyFactor;
   int mRewardFactor;
+
+  bool mPulseIcon;
 private:
   QTomatoConfig();
 };

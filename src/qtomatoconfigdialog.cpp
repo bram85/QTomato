@@ -50,6 +50,7 @@ void QTomatoConfigDialog::getConfig() const
   config->mLongBreakInterval = ui->longBreakIntervalInput->value();
   config->mPenaltyFactor = qRound( ui->penaltyFactorInput->value() * 100 ) ;
   config->mRewardFactor = qRound( ui->rewardFactorInput->value() * 100 );
+  config->mPulseIcon = ui->pulseIconCheck->isChecked();
 }
 
 void QTomatoConfigDialog::setConfig()
@@ -62,4 +63,5 @@ void QTomatoConfigDialog::setConfig()
   ui->longBreakIntervalInput->setValue( config->mLongBreakInterval );
   ui->penaltyFactorInput->setValue( qreal( config->mPenaltyFactor ) / 100 );
   ui->rewardFactorInput->setValue( qreal( config->mRewardFactor ) / 100 );
+  ui->pulseIconCheck->setChecked( config->mPulseIcon );
 }

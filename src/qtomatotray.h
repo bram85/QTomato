@@ -45,6 +45,9 @@ protected slots:
     void slotStep();
     void slotReleaseLock();
     void slotAbout();
+    void slotTickPulseTimer();
+    void slotStartPulse();
+    void slotStopPulse();
 
 protected:
     void buildMenu();
@@ -55,6 +58,9 @@ private:
     QMenu *mMenu;
     QTomatoTimer *mTimer;
     int mStepLock;
+    QIcon mIcon;
+    QPixmap mBasePixmap;
+    QTimer *mPulseTimer;
 };
 
 #endif // QTOMATOTRAY_H

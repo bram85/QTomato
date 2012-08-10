@@ -31,16 +31,25 @@ QTomatoTray::QTomatoTray(QObject *parent) :
     QSystemTrayIcon( QIcon( ":/icons/res/tomato.svg" ), parent)
   , mMenu( 0 )
   , mStepLock( 0 )
+  , mPulseTimer( new QTimer( this ) )
 {
+    mIcon = QIcon( ":/icons/res/tomato.svg" );
+    mBasePixmap = mIcon.pixmap( 64, 64 );
+
     mTimer = new QTomatoTimer( this );
     connect( mTimer, SIGNAL(tick( int, int ) ), SLOT( slotTick( int, int )));
     connect( mTimer, SIGNAL(pomodoroCompleted()), SLOT( slotPomodoroCompleted() ) );
     connect( mTimer, SIGNAL(shortBreakCompleted()), SLOT( slotShortBreakCompleted()) );
     connect( mTimer, SIGNAL(longBreakCompleted()), SLOT( slotLongBreakCompleted()) );
+    connect( mTimer, SIGNAL(pomodoroCompleted()), SLOT( slotStartPulse() ) );
+    connect( mTimer, SIGNAL(shortBreakCompleted()), SLOT( slotStartPulse()) );
+    connect( mTimer, SIGNAL(longBreakCompleted()), SLOT( slotStartPulse()) );
     connect( mTimer, SIGNAL(requestConfirmation()), SLOT( slotRequestConfirmation() ) );
 
     connect( this, SIGNAL(activated(QSystemTrayIcon::ActivationReason)), SLOT(slotActivated(QSystemTrayIcon::ActivationReason)));
     connect( this, SIGNAL(messageClicked()), SLOT(slotStep()));
+
+    connect( mPulseTimer, SIGNAL(timeout()), SLOT( slotTickPulseTimer() ) );
 
     buildMenu();
     updateTooltip();
@@ -61,6 +70,7 @@ void QTomatoTray::slotStep()
   if ( mStepLock == 0 ) {
     ++mStepLock;
     QTimer::singleShot( 100, this, SLOT( slotReleaseLock() ) );
+    slotStopPulse();
     mTimer->step();
   }
 }
@@ -73,10 +83,7 @@ void QTomatoTray::slotTick( int pSecondsLeft, int pTotal )
 
 void QTomatoTray::updateIcon( int pSecondsLeft, int pTotal )
 {
-  static QIcon icon( ":/icons/res/tomato.svg" );
-  static QPixmap base = icon.pixmap( 64, 64 );
-
-  QPixmap pm = base;
+  QPixmap pm = mBasePixmap;
 
   if ( pSecondsLeft != -1 ) {
     // turn to gray
@@ -93,7 +100,9 @@ void QTomatoTray::updateIcon( int pSecondsLeft, int pTotal )
     p.fillRect( 64 - width, 0, width, 64, QColor( 0, 0, 0, 128 ) );
   }
 
-  setIcon( QIcon( pm ) );
+  if ( !mPulseTimer->isActive() ) {
+    setIcon( QIcon( pm ) );
+  }
 }
 
 void QTomatoTray::slotPomodoroCompleted()
@@ -274,4 +283,41 @@ void QTomatoTray::slotIdle()
   if ( QMessageBox::question( 0, tr( "QTomato" ), question, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes ) {
     mTimer->goIdle();
   }
+}
+
+void QTomatoTray::slotStartPulse() {
+  mPulseTimer->start( 50 );
+}
+
+void QTomatoTray::slotStopPulse() {
+  mPulseTimer->stop();
+}
+
+void QTomatoTray::slotTickPulseTimer() {
+  static double opacity = 0;
+  static short int direction = 1;
+
+  opacity += 4 * direction;
+
+  if ( opacity > 128 ) {
+    direction = -1;
+    opacity = 128;
+  } else if ( opacity < 0 ) {
+    direction = 1;
+    opacity = 0;
+  }
+
+  QPixmap pm = mBasePixmap;
+
+  QPainter p( &pm );
+
+  // no border
+  QPen pen = p.pen();
+  pen.setWidth( 0 );
+  p.setPen( pen );
+
+  p.setCompositionMode( QPainter::CompositionMode_SourceAtop );
+
+  p.fillRect( 0, 0, 64, 64, QColor( 0, 0, 0, opacity ) );
+  setIcon( QIcon( pm ) );
 }
