@@ -21,6 +21,12 @@
 
 #include "qtomatoconfig.h"
 
+#ifdef QT_NO_DEBUG
+  static const QString gSuffix;
+#else
+  static const QString gSuffix = "-dbg";
+#endif
+
 QTomatoConfig::QTomatoConfig()
 {
 #ifdef QT_NO_DEBUG
@@ -55,12 +61,12 @@ void QTomatoConfig::save( const QTomatoConfig &pConfig )
 {
   QSettings s;
 
-  s.setValue( "pomodorolength", pConfig.mPomodoroLength );
-  s.setValue( "shortbreaklength", pConfig.mShortBreakLength );
-  s.setValue( "longbreaklength", pConfig.mLongBreakLength );
-  s.setValue( "longbreakinterval", pConfig.mLongBreakInterval );
-  s.setValue( "penaltyfactor", pConfig.mPenaltyFactor );
-  s.setValue( "rewardfactor", pConfig.mRewardFactor );
+  s.setValue( "pomodorolength" + gSuffix, pConfig.mPomodoroLength );
+  s.setValue( "shortbreaklength" + gSuffix, pConfig.mShortBreakLength );
+  s.setValue( "longbreaklength" + gSuffix, pConfig.mLongBreakLength );
+  s.setValue( "longbreakinterval" + gSuffix, pConfig.mLongBreakInterval );
+  s.setValue( "penaltyfactor" + gSuffix, pConfig.mPenaltyFactor );
+  s.setValue( "rewardfactor" + gSuffix, pConfig.mRewardFactor );
 }
 
 QTomatoConfig QTomatoConfig::load()
@@ -68,12 +74,12 @@ QTomatoConfig QTomatoConfig::load()
   QSettings s;
   QTomatoConfig config;
 
-  config.mPomodoroLength = s.value( "pomodorolength", config.mPomodoroLength ).toInt();
-  config.mShortBreakLength = s.value( "shortbreaklength", config.mShortBreakLength ).toInt();
-  config.mLongBreakLength = s.value( "longbreaklength", config.mLongBreakLength ).toInt();
-  config.mLongBreakInterval = s.value( "longbreakinterval", config.mLongBreakInterval ).toInt();
-  config.mPenaltyFactor = s.value( "penaltyfactor", config.mPenaltyFactor ).toInt();
-  config.mRewardFactor = s.value( "rewardfactor", config.mRewardFactor ).toInt();
+  config.mPomodoroLength = s.value( "pomodorolength" + gSuffix, config.mPomodoroLength ).toInt();
+  config.mShortBreakLength = s.value( "shortbreaklength" + gSuffix, config.mShortBreakLength ).toInt();
+  config.mLongBreakLength = s.value( "longbreaklength" + gSuffix, config.mLongBreakLength ).toInt();
+  config.mLongBreakInterval = s.value( "longbreakinterval" + gSuffix, config.mLongBreakInterval ).toInt();
+  config.mPenaltyFactor = s.value( "penaltyfactor" + gSuffix, config.mPenaltyFactor ).toInt();
+  config.mRewardFactor = s.value( "rewardfactor" + gSuffix, config.mRewardFactor ).toInt();
 
   return config;
 }
