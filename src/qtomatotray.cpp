@@ -286,7 +286,9 @@ void QTomatoTray::slotIdle()
 }
 
 void QTomatoTray::slotStartPulse() {
-  mPulseTimer->start( 50 );
+  if ( QTomatoConfig::instance()->mPulseIcon ) {
+    mPulseTimer->start( 50 );
+  }
 }
 
 void QTomatoTray::slotStopPulse() {
