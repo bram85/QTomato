@@ -29,10 +29,11 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
   , mState( QTomatoTimer::IDLE )
   , mSecondsLeft( 0 )
   , mTotalSeconds( 0 )
-  , mCompleted( 0 )
   , mTotalCompleted( 0 )
 {
   mConfig = QTomatoConfig::instance();
+  mBreaksUntilLongBreak = mConfig->mLongBreakInterval;
+
   connect( &mTimer, SIGNAL(timeout()), SLOT(slotTick()));
 }
 
@@ -115,7 +116,7 @@ void QTomatoTimer::goIdle()
 void QTomatoTimer::reset()
 {
     goIdle();
-    mCompleted = 0;
+    mBreaksUntilLongBreak = mConfig->mLongBreakInterval;
     mTotalCompleted = 0;
 }
 
@@ -135,7 +136,7 @@ void QTomatoTimer::slotTick()
   if ( mSecondsLeft == 0 ) {
     switch ( mState ) {
       case QTomatoTimer::POMODORO: {
-        ++mCompleted;
+        --mBreaksUntilLongBreak;
         ++mTotalCompleted;
         mState = AWAITBREAK;
         emit pomodoroCompleted();
@@ -179,10 +180,10 @@ void QTomatoTimer::step()
       break;
     }
     case AWAITBREAK: {
-      if ( mCompleted < mConfig->mLongBreakInterval ) {
+      if ( mBreaksUntilLongBreak ) {
         startShortBreak();
       } else {
-        mCompleted = 0;
+        mBreaksUntilLongBreak = mConfig->mLongBreakInterval;
         startLongBreak();
       }
       break;
@@ -202,7 +203,7 @@ void QTomatoTimer::confirm()
     break;
   }
   case LONGBREAK: {
-    mCompleted = 0;
+    mBreaksUntilLongBreak = mConfig->mLongBreakInterval;
     // fall through
   }
   case SHORTBREAK: {
@@ -235,7 +236,7 @@ QString QTomatoTimer::stateToString( QTomatoState pState )
 
 bool QTomatoTimer::nextBreakIsLong() const
 {
-  return mCompleted == mConfig->mLongBreakInterval;
+  return mBreaksUntilLongBreak == 0;
 }
 
 int QTomatoTimer::getCompleted() const

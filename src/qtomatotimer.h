@@ -85,7 +85,7 @@ private:
     QTomatoState mState;
     int mSecondsLeft;
     int mTotalSeconds;
-    int mCompleted;
+    int mBreaksUntilLongBreak;
     int mTotalCompleted;
 
     QTimer mTimer;
