@@ -80,6 +80,9 @@ protected:
     void startShortBreak();
     void startLongBreak();
 
+protected slots:
+    void resetLongBreaks();
+
 private:
     QTomatoConfig *mConfig;
     QTomatoState mState;
