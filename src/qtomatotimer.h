@@ -91,7 +91,8 @@ private:
     int mBreaksUntilLongBreak;
     int mTotalCompleted;
 
-    QTimer mTimer;
+    QTimer mTimer; // general timer for measuring pomodoro and break lengths
+    QTimer mIdleTimer; // measures how long QTomato is idle
 };
 
 #endif // QTOMATOTIMER_H

@@ -35,6 +35,8 @@ QTomatoTimer::QTomatoTimer(QObject *parent) :
   resetLongBreaks();
 
   connect( &mTimer, SIGNAL(timeout()), SLOT(slotTick()));
+  connect( &mIdleTimer, SIGNAL(timeout()), SLOT(resetLongBreaks()));
+  mIdleTimer.setSingleShot( true );
 }
 
 void QTomatoTimer::startPomodoro()
@@ -56,6 +58,7 @@ void QTomatoTimer::startPomodoro()
 
   mState = QTomatoTimer::POMODORO;
   startTimer( mConfig->mPomodoroLength + penalty );
+  mIdleTimer.stop();
 }
 
 void QTomatoTimer::startShortBreak()
@@ -109,6 +112,9 @@ void QTomatoTimer::goIdle()
   mTimer.stop();
   mState = IDLE;
   mSecondsLeft = 0;
+
+  // when we're idle which accounts for a long break (or longer), reset the long break counter
+  mIdleTimer.start( mConfig->mLongBreakLength * 1000 );
 
   emit tick( -1, 0 );
 }
