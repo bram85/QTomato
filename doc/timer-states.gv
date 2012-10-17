@@ -12,28 +12,29 @@ digraph {
   "AwaitPomodoro";
 
   Idle -> Pomodoro [ label = "click" ];
-  Idle -> Idle [ label = "reset, completed := 0" ];
+  Idle -> Idle [ label = "longidle, untillong := 4" ];
+  Idle -> Idle [ label = "reset, untillong := 4" ];
 
-  Pomodoro -> AwaitBreak [ label = "25 min, completed++" ];
-  Pomodoro -> Idle [ label = "reset, completed := 0" ];
+  Pomodoro -> AwaitBreak [ label = "25 min, untillong--" ];
+  Pomodoro -> Idle [ label = "reset, untillong := 4" ];
   Pomodoro -> Idle [ label = "click*" ];
 
-  AwaitBreak -> ShortBreak [ label = "click, completed < 4" ];
-  AwaitBreak -> LongBreak [ label = "click, completed = 4" ];
-  AwaitBreak -> Idle [ label = "reset, completed := 0" ];
+  AwaitBreak -> ShortBreak [ label = "click, untillong < 4" ];
+  AwaitBreak -> LongBreak [ label = "click, untillong = 4" ];
+  AwaitBreak -> Idle [ label = "reset, untillong := 4" ];
   AwaitBreak -> Idle [ label = "idle" ];
 
   ShortBreak -> AwaitPomodoro [ label = "5 min" ];
-  ShortBreak -> Idle [ label = "reset, completed := 0" ];
+  ShortBreak -> Idle [ label = "reset, untillong := 4" ];
   ShortBreak -> Pomodoro[ label = "click*"  ];
   ShortBreak -> Idle [ label="idle" ];
 
-  LongBreak -> AwaitPomodoro [ label = "15 min, completed := 0" ];
-  LongBreak -> Idle [ label = "reset, completed := 0" ];
-  LongBreak -> Pomodoro [ label = "click*, completed := 0" ];
+  LongBreak -> AwaitPomodoro [ label = "15 min, untillong := 4" ];
+  LongBreak -> Idle [ label = "reset, untillong := 4" ];
+  LongBreak -> Pomodoro [ label = "click*, untillong := 4" ];
   LongBreak -> Idle [ label="idle" ];
 
   AwaitPomodoro -> Pomodoro [ label = "click" ];
-  AwaitPomodoro -> Idle [ label = "reset, completed := 0" ];
+  AwaitPomodoro -> Idle [ label = "reset, untillong := 4" ];
   AwaitPomodoro -> Idle [ label = "idle" ];
 }
