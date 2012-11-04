@@ -232,6 +232,7 @@ void QTomatoTray::slotReset()
 {
   if ( QMessageBox::question( 0, tr( "QTomato" ), tr( "Do you want to reset QTomato? All completed pomodoros will be lost." ), QMessageBox::Yes, QMessageBox::No ) == QMessageBox::Yes ) {
     mTimer->reset();
+    mPulseTimer->stop();
   }
 }
 
@@ -282,6 +283,7 @@ void QTomatoTray::slotIdle()
 
   if ( QMessageBox::question( 0, tr( "QTomato" ), question, QMessageBox::Yes, QMessageBox::No) == QMessageBox::Yes ) {
     mTimer->goIdle();
+    mPulseTimer->stop();
   }
 }
 
