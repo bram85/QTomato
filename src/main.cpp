@@ -23,7 +23,7 @@
 #include "qtomatotray.h"
 
 static const QString sAppname = "QTomato";
-static const QString sVersion = "0.7";
+static const QString sVersion = "0.7.1";
 static const QString sOrganization = "bramschoenmakers.nl";
 static const QString sDomain = "bramschoenmakers.nl";
 
